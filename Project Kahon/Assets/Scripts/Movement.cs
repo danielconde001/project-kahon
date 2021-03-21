@@ -28,26 +28,40 @@ public class Movement : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.W)) 
         {
             if (NextCellIsValid(Vector3.forward))
-                StartCoroutine(Flip(forward.position, Vector3.right));
+            {
+                Flip(forward.position, Vector3.right);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.A)) 
         {
             if (NextCellIsValid(-Vector3.right))
-                StartCoroutine(Flip(left.position, Vector3.forward));
+            {
+                Flip(left.position, Vector3.forward);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.S)) 
         {
             if (NextCellIsValid(-Vector3.forward))
-                StartCoroutine(Flip(back.position, -Vector3.right));
+            {
+                Flip(back.position, -Vector3.right);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.D)) 
         {
             if (NextCellIsValid(Vector3.right))
-                StartCoroutine(Flip(right.position, -Vector3.forward));
+            {
+                Flip(right.position, -Vector3.forward);
+            }
         }
     }
 
-    private IEnumerator Flip (Vector3 point, Vector3 axis)
+    private void Flip(Vector3 point, Vector3 axis)
+    {
+        ActionManager.OnAction();
+        StartCoroutine(FlipCoroutine(point, axis));
+    }
+
+    private IEnumerator FlipCoroutine (Vector3 point, Vector3 axis)
     {
         canFlip = false;
         for (int i = 0; i < rotationByDegrees / flipRate; i++)
@@ -68,4 +82,5 @@ public class Movement : MonoBehaviour
         }
         else return false;
     }
+
 }
