@@ -5,6 +5,8 @@ using UnityEngine;
 public sealed class GridManager : MonoBehaviour
 {
     [SerializeField] uint columns, rows;
+    public uint Columns {get {return columns;}}
+    public uint Rows {get {return rows;}}
 
     public void CreateGrid()
     {
