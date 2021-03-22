@@ -5,12 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class LevelData
 {
-    public int BestScore;
-    public int LevelIndex;
-    public int[] LevelScores = new int[5];
+    //public int BestScore;
+    //public int LevelIndex;
+    public int[] BestScores = {0,0,0,0,0};
 
     public LevelData(LevelManager levelManager)
     {
-        BestScore = levelManager.CurrentScore;
+        BestScores[levelManager.LevelIndex] = levelManager.CurrentScore;
     }
 }

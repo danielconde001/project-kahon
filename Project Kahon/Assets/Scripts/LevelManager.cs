@@ -30,20 +30,16 @@ public class LevelManager : MonoBehaviour
         }     
     }
 
+   public static Action OnAction;
+
     private void OnEnable() {
         OnAction += () => { currentScore++; }; 
     }
 
-    public static Action OnAction;
-
-    // Debug
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) SaveSystem.SaveScore(this);
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            LevelData levelData = SaveSystem.LoadScore();
-            bestScore = levelData.BestScore;
-        }
+    private void Start() 
+    {
+        LevelData levelData = SaveSystem.LoadScore();
+        bestScore = levelData.BestScores[LevelIndex];
     }
 
     public void GoToNextLevel()

@@ -50,6 +50,6 @@ public class RatingCalculation : MonoBehaviour
         bestScoreText.text = levelManager.BestScore.ToString();
         currentScoreText.text = levelManager.CurrentScore.ToString();
 
-        if (levelManager.CurrentScore < levelManager.BestScore) newHighScoreText.SetActive(true); 
+        else if (levelManager.CurrentScore < levelManager.BestScore) newHighScoreText.SetActive(true); 
     }
 }
