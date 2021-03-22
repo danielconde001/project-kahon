@@ -15,6 +15,9 @@ public class Movement : MonoBehaviour
     PositionByCell positionByCell;
     
     private void Awake() {
+
+        if (!center) ProvideCenterObject();
+    
         center.position = transform.position;
 
         obstacleDetection = GetComponent<ObstacleDetection>();
@@ -57,7 +60,7 @@ public class Movement : MonoBehaviour
 
     private void Flip(Vector3 point, Vector3 axis)
     {
-        ActionManager.OnAction();
+        LevelManager.OnAction();
         StartCoroutine(FlipCoroutine(point, axis));
     }
 
@@ -81,6 +84,16 @@ public class Movement : MonoBehaviour
             else return false;
         }
         else return false;
+    }
+
+    private void ProvideCenterObject()
+    {
+        GameObject newGameObject = (GameObject)Instantiate(Resources.Load("Center"));
+            center = newGameObject.transform;
+            forward = center.transform.Find("Forward");
+            back = center.transform.Find("Back");
+            left = center.transform.Find("Left");
+            right = center.transform.Find("Right");
     }
 
 }
