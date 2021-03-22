@@ -21,20 +21,20 @@ public class PatrollingEnemyBehaviour : EnemyBehaviour
         switch (currentCommand)
         {
             case PatrolCommand.MoveLeft:
-                if (!inReverse) Debug.Log("Left");
-                else Debug.Log("Right");
+                if (!inReverse) Move(-Vector3.right);
+                else Move(Vector3.right);
                 break;
             case PatrolCommand.MoveRight:
-                if (!inReverse) Debug.Log("Right");
-                else Debug.Log("Left");
+                if (!inReverse) Move(Vector3.right);
+                else Move(-Vector3.right);
                 break;
             case PatrolCommand.MoveUp:
-                if (!inReverse) Debug.Log("Up");
-                else Debug.Log("Down");
+                if (!inReverse) Move(Vector3.forward);
+                else Move(-Vector3.forward);
                 break;
             case PatrolCommand.MoveDown:
-                if (!inReverse) Debug.Log("Down");
-                else Debug.Log("Up");
+                if (!inReverse) Move(-Vector3.forward);
+                else Move(Vector3.forward);
                 break;
         }
 
@@ -64,6 +64,12 @@ public class PatrollingEnemyBehaviour : EnemyBehaviour
 
     private IEnumerator MoveCoroutine(Vector3 direction)
     {
-        yield break;
+        // replace 20 with a modifiable value. Make it not hard coded in the future.
+        for (int i = 0; i < 20; i++)
+        {
+            transform.rotation = Quaternion.LookRotation(direction/20, Vector3.up);
+            transform.position += direction/20;
+            yield return new WaitForEndOfFrame();
+        }
     }
 }
